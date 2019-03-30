@@ -3,15 +3,20 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
+            <th>#</th>
             <th>Nome</th>
+            <th>Ação</th>
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($this->categorias as $categoria) : ?>
+        <?php foreach ($this->data as $categoria) : ?>
         <tr>
+            <td><?php echo $categoria->getId(); ?></td>
             <td><?php echo $categoria->getNome(); ?></td>
+            <td></td>
         </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
+    <?php echo $this->paginationControl($this->data, 'Sliding', 'paginator'); ?>
 </div>

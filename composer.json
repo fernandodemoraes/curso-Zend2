@@ -8,7 +8,9 @@
     ],
     "homepage": "http://framework.zend.com/",
     "require": {
-        "php": ">=5.3.3",
-        "zendframework/zendframework": "~2.4.11"
+        "php": ">=7.0.0",
+        "zendframework/zendframework": "~2.4.11",
+        "doctrine/doctrine-orm-module": "*",
+        "neilime/zf2-twb-bundle": "3.*@stable"
     }
 }

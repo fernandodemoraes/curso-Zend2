@@ -1,0 +1,41 @@
+<?php
+
+$urlPattern = $_SERVER['REQUEST_URI'];
+$formartUrl = function ($page) use ($urlPattern) {
+    if (!preg_match("/page/", $urlPattern)) {
+        return $urlPattern . "/page/" . $page;
+    } else {
+        return preg_replace('/\d/', $page, $urlPattern);
+    }
+}
+?>
+
+<?php if ($this->pageCount): ?>
+<div class="text-right">
+    <div class="paginationControl">
+        <ul class="pagination justify-content-center">
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <li><a class="page-link" href="<?php echo $formartUrl($this->previous); ?>">Anterior</a></li>
+        <?php else: ?>
+            <li class="disabled"><a class="page-link" href="#" tabindex="-1">Anterior</a></li>
+        <?php endif; ?>
+
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+                <li><a class="page-link" href="<?php echo $formartUrl($this->route . $page); ?>"><?php echo $page; ?></a></li>
+            <?php else: ?>
+                <li class="disabled"><a class="page-link"><?php echo $page; ?></a></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <li><a class="page-link" href="<?php echo $formartUrl($this->next); ?>">Próxima</a></li>
+        <?php else: ?>
+            <li class="disabled"><a class="page-link" href="#" tabindex="-1">Próxima</a></li>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>

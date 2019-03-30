@@ -2,6 +2,11 @@
 
 namespace Livraria;
 
+use Doctrine\ORM\EntityManager;
+use Livraria\Model\CategoriaTable;
+use Livraria\Service\Categoria as CategoriaService;
+use Zend\Db\Adapter\Adapter;
+
 class Module
 {
     public function getConfig()
@@ -11,12 +16,37 @@ class Module
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
+                    __NAMESPACE__ . 'Admin' => __DIR__ . '/src/' . __NAMESPACE__ . 'Admin',
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Get Service Config
+     *
+     * @return array
+     */
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                'Livraria\Model\CategoriaService' => function($service) {
+                    $dbAdapter = $service->get(Adapter::class);
+                    $categoriaTable = new CategoriaTable($dbAdapter);
+                    $categoriaService = new \Livraria\Model\CategoriaService($categoriaTable);
+
+                    return $categoriaService;
+                },
+
+                'Livraria\Service\Categoria' => function($service) {
+                    return new CategoriaService($service->get(EntityManager::class));
+                }
+            ]
+        ];
     }
 }
