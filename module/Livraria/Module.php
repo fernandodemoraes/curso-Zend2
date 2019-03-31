@@ -9,7 +9,10 @@ use Livraria\Service\Livro as LivroService;
 use Livraria\Service\User as UserService;
 use LivrariaAdmin\Form\Livro as LivroForm;
 use Livraria\Auth\Adapter as AuthAdapter;
+use Zend\Authentication\AuthenticationService;
 use Zend\Db\Adapter\Adapter;
+use Zend\ModuleManager\ModuleManager;
+use Zend\Authentication\Storage\Session as SessionStorage;
 
 class Module
 {
@@ -28,6 +31,28 @@ class Module
                 ],
             ],
         ];
+    }
+
+    /**
+     * Verifica se o usuário está logado
+     *
+     * @param ModuleManager $moduleManager
+     */
+    public function init(ModuleManager $moduleManager)
+    {
+        $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+        $sharedEvents->attach('ZendMvcControllerAbstractActionController', 'dispatch', function ($e) {
+            $auth = new AuthenticationService();
+            $auth->setStorage(new SessionStorage("LivrariaAdmin"));
+
+            $controller   = $e->getTarget();
+            $matchedRoute = $controller->getEvent()->getRouteMatch()->getMatchedRouteName();
+
+
+            if (!$auth->hasIdentity() and ($matchedRoute == 'livraria-admin' or $matchedRoute == 'livraria-admin-interna')) {
+                return $controller->redirect()->toRoute('livraria-admin-auth');
+            }
+        }, 99);
     }
 
     /**

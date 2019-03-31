@@ -16,6 +16,11 @@ use Zend\View\Model\ViewModel;
  */
 class AuthController extends AbstractActionController
 {
+    /**
+     * Index action
+     *
+     * @return array|\Zend\Http\Response|ViewModel
+     */
     public function indexAction()
     {
         $form = new LoginForm();
@@ -31,7 +36,7 @@ class AuthController extends AbstractActionController
 
                 $auth = new AuthenticationService();
 
-                $sessionStorage = new SessionStorage("livrariaAdmin");
+                $sessionStorage = new SessionStorage("LivrariaAdmin");
                 $auth->setStorage($sessionStorage);
 
                 $authAdapter = $this->getServiceLocator()->get(Adapter::class);
@@ -53,5 +58,14 @@ class AuthController extends AbstractActionController
             'form'  => $form,
             'error' => $erro
         ]);
+    }
+
+    public function logoutAction()
+    {
+        $auth = new AuthenticationService();
+        $auth->setStorage(new SessionStorage('LivrariaAdmin'));
+        $auth->clearIdentity();
+
+        return $this->redirect()->toRoute('livraria-admin-auth');
     }
 }

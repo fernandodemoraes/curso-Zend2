@@ -50,6 +50,16 @@ return [
                     ]
                 ]
             ],
+            'livraria-admin-logout' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/admin/auth/logout',
+                    'defaults' => [
+                        'action' => 'logout',
+                        'controller' => 'livraria-admin/auth'
+                    ]
+                ]
+            ],
         ],
     ],
     'controllers' => [
