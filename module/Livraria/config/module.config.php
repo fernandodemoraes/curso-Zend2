@@ -4,6 +4,7 @@ namespace Livraria;
 
 use Livraria\Controller\IndexController;
 use LivrariaAdmin\Controller\CategoriasController;
+use LivrariaAdmin\Controller\LivrosController;
 
 return [
     'router' => [
@@ -18,6 +19,15 @@ return [
                     ],
                 ],
             ],
+            'livraria-admin-interna' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/admin/[:controller[/:action][/:id]]',
+                    'constraints' => [
+                        'id' => '[0-9]+'
+                    ]
+                ]
+            ],
             'livraria-admin' => [
                 'type' => 'Segment',
                 'options' => [
@@ -28,21 +38,13 @@ return [
                     ]
                 ]
             ],
-            'livraria-admin-interna' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/admin/[:controller[/:action][/:id]]',
-                    'constraints' => [
-                        'id' => '[0-9]+'
-                    ]
-                ]
-            ]
         ],
     ],
     'controllers' => [
         'invokables' => [
             'Livraria\Controller\Index' => IndexController::class,
-            'categorias' => CategoriasController::class
+            'categorias'                => CategoriasController::class,
+            'livros'                    => LivrosController::class
         ],
     ],
     'view_manager' => [

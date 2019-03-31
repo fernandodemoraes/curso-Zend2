@@ -1,10 +1,10 @@
 <div class="container">
     <div class="row">
-        <h2>Categorias</h2>
+        <h2>Livros</h2>
         <p class="text-right">
             <a href="
                 <?php echo $this->url('livraria-admin', [
-                'controller' => 'categorias',
+                'controller' => 'livros',
                 'action'     => 'new',
             ]); ?>"
                class="btn btn-success">Novo <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -16,29 +16,35 @@
             <tr>
                 <th>#</th>
                 <th>Nome</th>
+                <th>Categoria</th>
+                <th>Autor</th>
+                <th>Valor</th>
                 <th>Ação</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($this->data as $categoria) : ?>
+            <?php foreach ($this->data as $livro) : ?>
                 <tr>
-                    <td><?php echo $categoria->getId(); ?></td>
-                    <td><?php echo $categoria->getNome(); ?></td>
+                    <td><?php echo $livro->getId(); ?></td>
+                    <td><?php echo $livro->getNome(); ?></td>
+                    <td><?php echo $livro->getCategoria(); ?></td>
+                    <td><?php echo $livro->getAutor(); ?></td>
+                    <td><?php echo $livro->getValor(); ?></td>
                     <td>
                         <a href="
                         <?php echo $this->url('livraria-admin-interna', [
-                            'controller' => 'categorias',
+                            'controller' => 'livros',
                             'action'     => 'edit',
-                            'id'         => $categoria->getId(),
+                            'id'         => $livro->getId(),
                         ]); ?>"
                            class="btn btn-primary">Editar <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
 
                         <a href="
                         <?php echo $this->url('livraria-admin-interna', [
-                            'controller' => 'categorias',
+                            'controller' => 'livros',
                             'action'     => 'delete',
-                            'id'         => $categoria->getId(),
+                            'id'         => $livro->getId(),
                         ]); ?>"
                            class="btn btn-danger">Deletar <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>

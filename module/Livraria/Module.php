@@ -5,6 +5,8 @@ namespace Livraria;
 use Doctrine\ORM\EntityManager;
 use Livraria\Model\CategoriaTable;
 use Livraria\Service\Categoria as CategoriaService;
+use Livraria\Service\Livro as LivroService;
+use LivrariaAdmin\Form\Livro as LivroForm;
 use Zend\Db\Adapter\Adapter;
 
 class Module
@@ -42,9 +44,17 @@ class Module
 
                     return $categoriaService;
                 },
-
                 'Livraria\Service\Categoria' => function($service) {
                     return new CategoriaService($service->get(EntityManager::class));
+                },
+                'Livraria\Service\Livro' => function($service) {
+                    return new LivroService($service->get(EntityManager::class));
+                },
+                'LivrariaAdmin\Form\Livro' => function($service) {
+                    $em = $service->get(EntityManager::class);
+                    $repository = $em->getRepository(\Livraria\Entity\Categoria::class);
+                    $categorias = $repository->fetchPairs();
+                    return new LivroForm(null, $categorias);
                 }
             ]
         ];

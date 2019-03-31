@@ -1,12 +1,12 @@
 <?php
-$title = 'Editar categoria';
+$title = 'Editar livro';
 $this->headTitle($title);
 ?>
     <h2><?php echo $this->escapeHtml($title); ?></h2>
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url('livraria-admin-interna', [
-    'controller' => 'categorias',
+    'controller' => 'livros',
     'action' => 'edit'
 ]));
 $form->prepare();

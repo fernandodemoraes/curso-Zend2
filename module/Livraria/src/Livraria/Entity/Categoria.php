@@ -21,6 +21,7 @@ class Categoria
     public function __construct($options = null)
     {
         Configurator::configure($this, $options);
+        $this->livros = ArrayCollection::class;
     }
 
     /**
@@ -36,6 +37,11 @@ class Categoria
      * @var string
      */
     protected $nome;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Livraria\Entity\Livro", mappedBy="categoria")
+     */
+    protected $livros;
 
     /**
      * @return int
@@ -90,5 +96,13 @@ class Categoria
             'id' => $this->getId(),
             'nome' => $this->getNome()
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getLivros()
+    {
+        return $this->livros;
     }
 }
