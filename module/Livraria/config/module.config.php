@@ -3,6 +3,7 @@
 namespace Livraria;
 
 use Livraria\Controller\IndexController;
+use LivrariaAdmin\Controller\AuthController;
 use LivrariaAdmin\Controller\CategoriasController;
 use LivrariaAdmin\Controller\LivrosController;
 use LivrariaAdmin\Controller\UsersController;
@@ -13,7 +14,6 @@ return [
             'livraria-home' => [
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => [
-                    'route'    => '/livraria',
                     'route'    => '/',
                     'defaults' => [
                         'controller' => 'Livraria\Controller\Index',
@@ -40,6 +40,16 @@ return [
                     ]
                 ]
             ],
+            'livraria-admin-auth' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/admin/auth',
+                    'defaults' => [
+                        'action' => 'index',
+                        'controller' => 'livraria-admin/auth'
+                    ]
+                ]
+            ],
         ],
     ],
     'controllers' => [
@@ -47,7 +57,8 @@ return [
             'Livraria\Controller\Index' => IndexController::class,
             'categorias'                => CategoriasController::class,
             'livros'                    => LivrosController::class,
-            'users'                     => UsersController::class
+            'users'                     => UsersController::class,
+            'livraria-admin/auth'       => AuthController::class,
         ],
     ],
     'view_manager' => [

@@ -8,6 +8,7 @@ use Livraria\Service\Categoria as CategoriaService;
 use Livraria\Service\Livro as LivroService;
 use Livraria\Service\User as UserService;
 use LivrariaAdmin\Form\Livro as LivroForm;
+use Livraria\Auth\Adapter as AuthAdapter;
 use Zend\Db\Adapter\Adapter;
 
 class Module
@@ -61,6 +62,9 @@ class Module
                     $categorias = $repository->fetchPairs();
                     return new LivroForm(null, $categorias);
                 },
+                'Livraria\Auth\Adapter' => function($service) {
+                    return new AuthAdapter($service->get(EntityManager::class));
+                }
             ]
         ];
     }

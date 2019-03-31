@@ -1,0 +1,21 @@
+<?php
+$title = 'Login';
+$this->headTitle($title);
+?>
+<h2><?php echo $this->escapeHtml($title); ?></h2>
+<?php if ($this->error) : ?>
+    <p class="alert alert-danger">Usuário ou senha inválidos</p>
+<?php endif; ?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('livraria-admin-auth'));
+$form->prepare();
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <?php echo $this->form($form); ?>
+        </div>
+    </div>
+</div>

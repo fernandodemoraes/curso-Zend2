@@ -117,6 +117,26 @@ class User
      */
     public function setPassword($password)
     {
+        $this->password = $this->encryptPassword($password);
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Encripta a senha
+     *
+     * @param $password
+     * @return string
+     */
+    public function encryptPassword($password)
+    {
         // hash com salt
         $hashSenha = hash('sha512', $password . $this->salt);
 
@@ -124,9 +144,7 @@ class User
         for ($iterator = 0; $iterator < 64000; $iterator++) {
             $hashSenha = hash('sha512', $hashSenha);
         }
-
-        $this->password = $hashSenha;
-        return $this;
+        return $hashSenha;
     }
 
     /**
