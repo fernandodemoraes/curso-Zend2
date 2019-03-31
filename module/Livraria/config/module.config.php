@@ -5,6 +5,7 @@ namespace Livraria;
 use Livraria\Controller\IndexController;
 use LivrariaAdmin\Controller\CategoriasController;
 use LivrariaAdmin\Controller\LivrosController;
+use LivrariaAdmin\Controller\UsersController;
 
 return [
     'router' => [
@@ -13,6 +14,7 @@ return [
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => [
                     'route'    => '/livraria',
+                    'route'    => '/',
                     'defaults' => [
                         'controller' => 'Livraria\Controller\Index',
                         'action'     => 'index',
@@ -44,7 +46,8 @@ return [
         'invokables' => [
             'Livraria\Controller\Index' => IndexController::class,
             'categorias'                => CategoriasController::class,
-            'livros'                    => LivrosController::class
+            'livros'                    => LivrosController::class,
+            'users'                     => UsersController::class
         ],
     ],
     'view_manager' => [

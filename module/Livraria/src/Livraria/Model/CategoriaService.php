@@ -25,7 +25,7 @@ class CategoriaService
     }
 
     /**
-     * Fechall
+     * Fech all
      *
      * @return \Zend\Db\ResultSet\ResultSet
      */

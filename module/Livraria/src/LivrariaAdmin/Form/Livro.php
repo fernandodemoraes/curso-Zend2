@@ -6,6 +6,11 @@ use Zend\Form\Element\Select;
 use Zend\Form\Element\Submit;
 use Zend\Form\Form;
 
+/**
+ * Class Livro
+ *
+ * @package LivrariaAdmin\Form
+ */
 class Livro extends Form
 {
     /**
@@ -15,9 +20,10 @@ class Livro extends Form
     protected $categorias;
 
     /**
-     * Categoria constructor.
+     * Livro constructor.
      *
      * @param null $name
+     * @param array $categorias
      */
     public function __construct($name = null, array $categorias)
     {
@@ -25,7 +31,6 @@ class Livro extends Form
         $this->categorias = $categorias;
 
         $this->setAttribute('method', 'post');
-        $this->setInputFilter(new CategoriaFilter());
 
         $this->add([
             'name' => 'id',

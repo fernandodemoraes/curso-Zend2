@@ -6,22 +6,22 @@ use Zend\Form\Element\Submit;
 use Zend\Form\Form;
 
 /**
- * Class Categoria
+ * Class User
+ *
  * @package LivrariaAdmin\Form
  */
-class Categoria extends Form
+class User extends Form
 {
     /**
-     * Categoria constructor.
+     * User constructor.
      *
      * @param null $name
      */
     public function __construct($name = null)
     {
-        parent::__construct('categoria');
+        parent::__construct('user');
 
         $this->setAttribute('method', 'post');
-        $this->setInputFilter(new CategoriaFilter());
 
         $this->add([
             'name' => 'id',
@@ -35,8 +35,31 @@ class Categoria extends Form
                 'label' => 'Nome',
             ],
             'attributes' => [
-                'id' => 'nome',
-                'placeholder' => 'Informe a categoria',
+                'placeholder' => 'Informe o nome do usuário',
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'email',
+            'options' => [
+                'label' => 'E-mail',
+                'type' => 'email',
+            ],
+            'attributes' => [
+                'type' => 'email',
+                'placeholder' => 'Informe o e-mail',
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'password',
+            'options' => [
+                'label' => 'Senha',
+                'type' => 'Password',
+            ],
+            'attributes' => [
+                'type' => 'password',
+                'placeholder' => 'Informe a senha',
             ]
         ]);
 

@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <h2>Usuários</h2>
+        <p class="text-right">
+            <a href="
+                <?php echo $this->url('livraria-admin', [
+                'controller' => 'users',
+                'action'     => 'new',
+            ]); ?>"
+               class="btn btn-success">Novo <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+        </p>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($this->data as $users) : ?>
+                <tr>
+                    <td><?php echo $users->getId(); ?></td>
+                    <td><?php echo $users->getNome(); ?></td>
+                    <td><?php echo $users->getEmail(); ?></td>
+                    <td>
+                        <a href="
+                        <?php echo $this->url('livraria-admin-interna', [
+                            'controller' => 'users',
+                            'action'     => 'edit',
+                            'id'         => $users->getId(),
+                        ]); ?>"
+                           class="btn btn-primary">Editar <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+
+                        <a href="
+                        <?php echo $this->url('livraria-admin-interna', [
+                            'controller' => 'users',
+                            'action'     => 'delete',
+                            'id'         => $users->getId(),
+                        ]); ?>"
+                           class="btn btn-danger">Deletar <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php echo $this->paginationControl($this->data, 'Sliding', 'paginator'); ?>
+    </div>
+</div>

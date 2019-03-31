@@ -5,6 +5,11 @@ namespace LivrariaAdmin\Controller;
 use Livraria\Entity\Livro;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Class LivrosController
+ *
+ * @package LivrariaAdmin\Controller
+ */
 class LivrosController extends AbstractActionCrudController
 {
     /**

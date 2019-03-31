@@ -20,6 +20,7 @@ class Livro extends AbstractService
 
     /**
      * Inserir
+     * Sobreescrita necessária por conta do relacionamento de livro com categoria
      *
      * @param array $data
      * @return \Livraria\Entity\Categoria|mixed
@@ -41,6 +42,7 @@ class Livro extends AbstractService
 
     /**
      * Atualizar
+     * Sobreescrita necessária por conta do relacionamento de livro com categoria
      *
      * @param array $data
      * @return bool|\Doctrine\Common\Proxy\Proxy|mixed|object|null

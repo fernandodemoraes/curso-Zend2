@@ -2,10 +2,15 @@
 
 namespace Livraria\Entity;
 
+/**
+ * Class Configurator
+ *
+ * @package Livraria\Entity
+ */
 class Configurator
 {
     /**
-     * Configurator
+     * Configurator. Ele é responsável por fazer os setters automagicamente.
      *
      * @param $target
      * @param $options
@@ -35,5 +40,4 @@ class Configurator
         }
         return $target;
     }
-
 }
