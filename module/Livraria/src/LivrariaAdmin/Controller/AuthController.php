@@ -60,6 +60,11 @@ class AuthController extends AbstractActionController
         ]);
     }
 
+    /**
+     * Logout action
+     *
+     * @return \Zend\Http\Response
+     */
     public function logoutAction()
     {
         $auth = new AuthenticationService();
