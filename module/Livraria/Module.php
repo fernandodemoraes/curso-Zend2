@@ -73,23 +73,23 @@ class Module
 
                     return $categoriaService;
                 },
-                'Livraria\Service\Categoria' => function($service) {
+                'Livraria\Service\Categoria'      => function($service) {
                     return new CategoriaService($service->get(EntityManager::class));
                 },
-                'Livraria\Service\Livro' => function($service) {
+                'Livraria\Service\Livro'          => function($service) {
                     return new LivroService($service->get(EntityManager::class));
                 },
-                'Livraria\Service\User' => function($service) {
+                'Livraria\Service\User'           => function($service) {
                     return new UserService($service->get(EntityManager::class));
                 },
-                'LivrariaAdmin\Form\Livro' => function($service) {
+                'LivrariaAdmin\Form\Livro'        => function($service) {
                     // injeta as categorias no form de livros
                     $em = $service->get(EntityManager::class);
                     $repository = $em->getRepository(\Livraria\Entity\Categoria::class);
                     $categorias = $repository->fetchPairs();
                     return new LivroForm(null, $categorias);
                 },
-                'Livraria\Auth\Adapter' => function($service) {
+                'Livraria\Auth\Adapter'           => function($service) {
                     return new AuthAdapter($service->get(EntityManager::class));
                 }
             ]
