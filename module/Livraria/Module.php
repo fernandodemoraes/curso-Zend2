@@ -7,12 +7,14 @@ use Livraria\Model\CategoriaTable;
 use Livraria\Service\Categoria as CategoriaService;
 use Livraria\Service\Livro as LivroService;
 use Livraria\Service\User as UserService;
+use Livraria\View\Helper\UserIdentity;
 use LivrariaAdmin\Form\Livro as LivroForm;
 use Livraria\Auth\Adapter as AuthAdapter;
 use Zend\Authentication\AuthenticationService;
 use Zend\Db\Adapter\Adapter;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Authentication\Storage\Session as SessionStorage;
+use Zend\Mvc\Controller\AbstractActionController;
 
 class Module
 {
@@ -41,7 +43,7 @@ class Module
     public function init(ModuleManager $moduleManager)
     {
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
-        $sharedEvents->attach('ZendMvcControllerAbstractActionController', 'dispatch', function ($e) {
+        $sharedEvents->attach(AbstractActionController::class, 'dispatch', function ($e) {
             $auth = new AuthenticationService();
             $auth->setStorage(new SessionStorage("LivrariaAdmin"));
 
@@ -56,7 +58,7 @@ class Module
     }
 
     /**
-     * Get Service Config
+     * Get service config
      *
      * @return array
      */
@@ -90,6 +92,20 @@ class Module
                 'Livraria\Auth\Adapter' => function($service) {
                     return new AuthAdapter($service->get(EntityManager::class));
                 }
+            ]
+        ];
+    }
+
+    /**
+     * Get view helper config
+     *
+     * @return array
+     */
+    public function getViewHelperConfig()
+    {
+        return [
+            'invokables' => [
+                'UserIdentity' => UserIdentity::class
             ]
         ];
     }
