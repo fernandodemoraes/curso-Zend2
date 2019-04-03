@@ -5,12 +5,18 @@
             <thead>
             <tr>
                 <th>Nome</th>
+                <th>Livros</th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($this->categorias as $categoria) : ?>
                 <tr>
                     <td><?php echo $categoria->getNome(); ?></td>
+                    <td>
+                        <?php foreach ($categoria->getLivros() as $livro) : ?>
+                            <?php echo $livro->getNome(); ?>
+                        <?php endforeach; ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

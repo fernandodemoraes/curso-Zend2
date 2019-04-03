@@ -71,6 +71,10 @@ return [
             'livraria-admin/auth'       => AuthController::class,
         ],
     ],
+    'module_layouts' => [
+        'Livraria'      => 'layout/layout',
+        'LivrariaAdmin' => 'layout/layout-admin'
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

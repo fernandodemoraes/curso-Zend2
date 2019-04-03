@@ -34,14 +34,38 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('livraria-home') ?>"><?php echo 'Livraria'; ?></a>
+                    <a class="navbar-brand" href="<?php echo $this->url('livraria-home') ?>"><?php echo 'Livraria Admin'; ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <?php if (!$this->UserIdentity('LivrariaAdmin')) : ?>
-                            <li class="active">
-                                <a href="<?php echo $this->url('livraria-admin-auth') ?>"><?php echo 'Login'; ?></a>
-                            </li>
+                        <li class="active">
+                            <?php if ($this->UserIdentity('LivrariaAdmin')) : ?>
+                            <a href="<?php echo $this->url('livraria-admin', [
+                                'controller' => 'categorias'
+                            ]) ?>"><?php echo 'Categorias'; ?>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo $this->url('livraria-admin', [
+                                'controller' => 'livros'
+                            ]) ?>"><?php echo 'Livros'; ?>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo $this->url('livraria-admin', [
+                                'controller' => 'users'
+                            ]) ?>"><?php echo 'Usuários'; ?>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="<?php echo $this->url('livraria-admin-logout') ?>"><?php echo 'Sair'; ?>
+                            </a>
+                        </li>
+                        <?php else: ?>
+                        <li class="active">
+                            <a href="<?php echo $this->url('livraria-admin-auth') ?>"><?php echo 'Login'; ?>
+                            </a>
+                        </li>
                         <?php endif; ?>
                     </ul>
                 </div><!--/.nav-collapse -->
